@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>吃菜吧 EatVege — 每天 3 樣菜，吃完賺 V 點</title>
-  <meta name="description" content="吃菜吧 EatVege 是免費的 iOS 健康輕社交 App。每天 3 樣菜：2 樣自選、1 樣命運抽。吃完打卡賺 V 點，和好友互相挑戰。">
-  <meta property="og:title" content="吃菜吧 EatVege">
-  <meta property="og:description" content="每天 3 樣菜：2 樣自選、1 樣命運抽。用每日小任務、V 點和好友挑戰，把吃菜變好玩。">
+  <title>吃菜吧 EatVege — 你今天，真的吃到菜了嗎？</title>
+  <meta name="description" content="近 9 成國人蔬果吃不夠。吃菜吧 EatVege 把「我要吃健康一點」拆成每天 3 樣菜的小任務，還能揪好友一起挑戰，把吃菜變成做得到的每日習慣。">
+  <meta property="og:title" content="吃菜吧 EatVege — 你今天，真的吃到菜了嗎？">
+  <meta property="og:description" content="近 9 成國人蔬果吃不夠。把「吃健康一點」拆成每天 3 樣菜的小任務，揪好友一起養成吃菜習慣。">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#5C9E3C">
   <link rel="icon" href="assets/eatvege-logo.png">
@@ -14,15 +14,18 @@
     :root {
       --matcha: #5C9E3C;
       --matcha-dark: #3D6B27;
-      --ink: #262B22;
-      --muted: #697164;
-      --cream: #FDFDFA;
-      --card-green: #EEF5E8;
-      --line: #DCE6D2;
+      --ink: #212617;
+      --muted: #6B7361;
+      --cream: #FBFCF7;
+      --card-green: #EDF4E6;
+      --card-green-2: #E1EDD6;
+      --line: #DCE6D0;
       --orange: #E8792B;
       --tomato: #E05338;
       --yellow: #FFCC38;
-      --shadow: 0 24px 70px rgba(61, 107, 39, .16);
+      --star: #FFC01E;
+      --shadow-sm: 0 10px 30px rgba(61, 107, 39, .10);
+      --shadow: 0 26px 70px rgba(61, 107, 39, .16);
     }
 
     * { box-sizing: border-box; }
@@ -32,566 +35,284 @@
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 12% 8%, rgba(92, 158, 60, .18), transparent 28rem),
-        radial-gradient(circle at 86% 16%, rgba(232, 121, 43, .14), transparent 26rem),
-        linear-gradient(180deg, #fff 0%, var(--cream) 42%, #F7FAF3 100%);
+        radial-gradient(circle at 10% 4%, rgba(92, 158, 60, .14), transparent 26rem),
+        radial-gradient(circle at 92% 12%, rgba(255, 204, 56, .12), transparent 24rem),
+        linear-gradient(180deg, #fff 0%, var(--cream) 46%, #F5FAEF 100%);
       line-height: 1.7;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     a { color: inherit; }
     .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
     header, main, footer { position: relative; z-index: 1; }
 
-    .ambient-veges {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+    /* Ambient low-poly veggies */
+    .ambient-veges { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .ambient-veges img {
-      position: absolute;
-      display: block;
-      user-select: none;
-      border-radius: 34px;
+      position: absolute; display: block; user-select: none; border-radius: 34px;
       opacity: 0;
-      filter: saturate(1.08) drop-shadow(0 24px 42px rgba(61, 107, 39, .12));
-      transform-origin: center;
-      animation: veggiePop 18s ease-in-out infinite;
+      filter: saturate(1.05) drop-shadow(0 20px 38px rgba(61, 107, 39, .10));
+      animation: veggiePop 20s ease-in-out infinite;
     }
-    .ambient-veges .bg-logo {
-      width: clamp(180px, 18vw, 330px);
-      top: 96px;
-      right: -74px;
-      animation-delay: .2s;
-    }
-    .ambient-veges .bg-root {
-      width: clamp(220px, 24vw, 430px);
-      left: -118px;
-      top: 38%;
-      animation-delay: 4.6s;
-    }
-    .ambient-veges .bg-leafy {
-      width: clamp(300px, 34vw, 560px);
-      right: -190px;
-      top: 58%;
-      opacity: .08;
-      animation-delay: 8.4s;
-    }
-    .ambient-veges .bg-grid {
-      width: clamp(290px, 32vw, 540px);
-      left: -150px;
-      bottom: -52px;
-      animation-delay: 12.2s;
-    }
-
+    .ambient-veges .bg-a { width: clamp(200px, 22vw, 380px); left: -110px; top: 34%; animation-delay: 3s; }
+    .ambient-veges .bg-b { width: clamp(260px, 30vw, 480px); right: -150px; top: 62%; opacity: .06; animation-delay: 9s; }
+    .ambient-veges .bg-c { width: clamp(260px, 30vw, 500px); left: -130px; bottom: -40px; animation-delay: 14s; }
     @keyframes veggiePop {
-      0%, 100% {
-        opacity: 0;
-        transform: translate3d(0, 24px, 0) scale(.92) rotate(-5deg);
-      }
-      10%, 38% {
-        opacity: .13;
-        transform: translate3d(0, 0, 0) scale(1) rotate(2deg);
-      }
-      52% {
-        opacity: .08;
-        transform: translate3d(0, -12px, 0) scale(1.03) rotate(-2deg);
-      }
-      64% {
-        opacity: 0;
-        transform: translate3d(0, -26px, 0) scale(.98) rotate(5deg);
-      }
+      0%, 100% { opacity: 0; transform: translate3d(0, 22px, 0) scale(.94) rotate(-4deg); }
+      12%, 40% { opacity: .12; transform: translate3d(0, 0, 0) scale(1) rotate(2deg); }
+      64% { opacity: 0; transform: translate3d(0, -24px, 0) scale(.98) rotate(4deg); }
     }
 
+    /* Header */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      position: sticky; top: 0; z-index: 10;
       backdrop-filter: blur(18px);
-      background: rgba(253, 253, 250, .78);
-      border-bottom: 1px solid rgba(220, 230, 210, .74);
+      background: rgba(251, 252, 247, .82);
+      border-bottom: 1px solid rgba(220, 230, 208, .7);
     }
-    .nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 900; letter-spacing: -.03em; }
-    .mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid rgba(220, 230, 210, .9);
-      box-shadow: 0 10px 30px rgba(92, 158, 60, .28);
-      overflow: hidden;
-    }
-    .mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.24);
-    }
+    .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 900; font-size: 20px; letter-spacing: -.03em; }
+    .brand .mark { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 14px; background: var(--card-green); }
+    .brand .mark img { width: 32px; height: 32px; object-fit: contain; }
     .nav-links { display: flex; align-items: center; gap: 22px; color: var(--muted); font-size: 15px; }
     .nav-links a { text-decoration: none; }
     .nav-links a:hover { color: var(--matcha-dark); }
-    .nav-cta {
-      color: #fff !important;
-      background: var(--matcha);
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 800;
-      box-shadow: 0 10px 22px rgba(92, 158, 60, .22);
-    }
+    .nav-cta { color: #fff !important; background: var(--matcha); padding: 10px 17px; border-radius: 999px; font-weight: 800; box-shadow: 0 10px 22px rgba(92, 158, 60, .24); }
 
+    /* Shared */
+    .eyebrow {
+      width: fit-content; display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(255, 255, 255, .8); color: var(--matcha-dark); font-weight: 800; font-size: 14px;
+    }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 56px; padding: 0 26px; border-radius: 999px; text-decoration: none;
+      font-weight: 900; font-size: 17px; border: 1px solid transparent;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .button.primary { color: #fff; background: var(--matcha); box-shadow: 0 18px 34px rgba(92, 158, 60, .28); }
+    .button.secondary { color: var(--matcha-dark); background: #fff; border-color: var(--line); }
+    .button:hover { transform: translateY(-2px); }
+    .button.block { width: 100%; }
+
+    /* Hero */
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
-      align-items: center;
-      gap: 52px;
-      padding: 88px 0 64px;
-      position: relative;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+      align-items: center; gap: 48px; padding: 76px 0 60px; position: relative;
     }
     .hero::before {
-      content: "";
-      position: absolute;
-      width: 170px;
-      height: 170px;
-      left: -78px;
-      top: 98px;
-      border-radius: 44% 56% 62% 38%;
-      background: rgba(255, 204, 56, .19);
-      z-index: -1;
+      content: ""; position: absolute; width: 160px; height: 160px; left: -70px; top: 84px;
+      border-radius: 44% 56% 62% 38%; background: rgba(255, 204, 56, .18); z-index: -1;
       animation: softBounce 7s ease-in-out infinite;
     }
-    .eyebrow {
-      width: fit-content;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 13px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .72);
-      color: var(--matcha-dark);
-      font-weight: 800;
-      font-size: 14px;
-    }
-    h1 {
-      margin: 18px 0 18px;
-      font-size: clamp(46px, 7.2vw, 86px);
-      line-height: .98;
-      letter-spacing: -.075em;
-      color: var(--ink);
-    }
-    .gradient-text {
-      display: block;
-      color: var(--matcha-dark);
-    }
-    .lead {
-      max-width: 640px;
-      margin: 0 0 30px;
-      color: var(--muted);
-      font-size: clamp(18px, 2vw, 22px);
-    }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin: 0 0 26px; }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 54px;
-      padding: 0 22px;
-      border-radius: 18px;
-      text-decoration: none;
-      font-weight: 900;
-      border: 1px solid transparent;
-    }
-    .button.primary { color: #fff; background: var(--matcha); box-shadow: 0 18px 34px rgba(92, 158, 60, .25); }
-    .button.secondary { color: var(--matcha-dark); background: #fff; border-color: var(--line); }
-    .button:hover { transform: translateY(-2px) rotate(-.4deg); transition: transform .18s ease, box-shadow .18s ease; }
+    h1 { margin: 20px 0 20px; font-size: clamp(42px, 6.6vw, 78px); line-height: 1.02; letter-spacing: -.055em; }
+    h1 .hl { color: var(--matcha-dark); }
+    .lead { max-width: 560px; margin: 0 0 30px; color: var(--muted); font-size: clamp(18px, 2vw, 22px); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin: 0 0 20px; }
     .fineprint { margin: 0; color: var(--muted); font-size: 14px; }
-    .proof {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 36px;
-      max-width: 650px;
-    }
-    .proof-card {
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: rgba(255,255,255,.72);
-    }
-    .proof-card strong { display: block; font-size: 22px; color: var(--matcha-dark); line-height: 1.1; }
-    .proof-card span { color: var(--muted); font-size: 13px; }
 
-    .phone-stage {
-      position: relative;
-      min-height: 650px;
-      display: grid;
-      place-items: center;
-    }
+    /* Phone mockup */
+    .phone-stage { position: relative; min-height: 600px; display: grid; place-items: center; }
     .blob {
-      position: absolute;
-      inset: 6% 2% 4% 5%;
-      border-radius: 42% 58% 52% 48%;
-      background: linear-gradient(135deg, rgba(92,158,60,.2), rgba(255,204,56,.18), rgba(224,83,56,.12));
-      filter: blur(.2px);
+      position: absolute; inset: 4% 2% 4% 4%; border-radius: 42% 58% 52% 48%;
+      background: linear-gradient(135deg, rgba(92,158,60,.2), rgba(255,204,56,.16), rgba(224,83,56,.1));
       transform: rotate(-7deg);
     }
     .phone {
-      position: relative;
-      width: min(360px, 92vw);
-      border: 10px solid #1D241C;
-      border-radius: 46px;
-      background: var(--cream);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      position: relative; width: min(340px, 92vw); border: 10px solid #1D241C;
+      border-radius: 46px; background: var(--cream); box-shadow: var(--shadow); overflow: hidden;
       animation: phoneBob 6.5s ease-in-out infinite;
     }
     .phone::before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 96px;
-      height: 24px;
-      border-radius: 999px;
-      background: #1D241C;
-      z-index: 2;
+      content: ""; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 92px; height: 22px; border-radius: 999px; background: #1D241C; z-index: 2;
     }
-    .screen { padding: 54px 20px 22px; }
-    .screen-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 16px; }
-    .screen-title { text-align: center; flex: 1; }
-    .screen-title strong { display: block; font-size: 30px; letter-spacing: -.04em; }
-    .screen-title span { color: var(--muted); font-size: 14px; }
-    .v-badge {
-      min-width: 68px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid var(--line);
-      color: var(--matcha-dark);
-      font-weight: 900;
-      text-align: center;
-    }
-    .task-card {
-      padding: 16px;
-      border-radius: 24px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid var(--line);
-    }
-    .task-head { display: flex; justify-content: space-between; color: var(--matcha-dark); font-weight: 900; margin-bottom: 10px; }
+    .screen { padding: 50px 18px 20px; }
+    .screen-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .screen-head small { color: var(--matcha-dark); font-weight: 800; }
+    .screen-progress { height: 6px; border-radius: 999px; background: var(--card-green); overflow: hidden; margin-bottom: 14px; }
+    .screen-progress span { display: block; width: 34%; height: 100%; background: var(--matcha); border-radius: inherit; }
+    .screen h2 { margin: 4px 0 12px; font-size: 26px; line-height: 1.15; letter-spacing: -.04em; }
     .tray {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      padding: 8px;
-      border: 2px solid rgba(92,158,60,.38);
-      border-radius: 24px;
-      background: linear-gradient(135deg, var(--card-green), #fff);
-      box-shadow: 0 10px 24px rgba(61,107,39,.1);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px;
+      border: 2px solid rgba(92,158,60,.32); border-radius: 22px;
+      background: linear-gradient(135deg, var(--card-green), #fff); box-shadow: var(--shadow-sm);
     }
-    .vege-slot {
-      min-height: 88px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #fff, rgba(92,158,60,.13));
-      border: 2px solid rgba(92,158,60,.22);
-      font-size: 42px;
-      animation: slotPeek 4.8s ease-in-out infinite;
+    .slot {
+      min-height: 84px; display: grid; place-items: center; border-radius: 16px;
+      background: linear-gradient(135deg, #fff, rgba(92,158,60,.12));
+      border: 2px solid rgba(92,158,60,.2); font-size: 40px; animation: slotPeek 4.8s ease-in-out infinite;
     }
-    .vege-slot:nth-child(2) { animation-delay: .65s; }
-    .vege-slot:nth-child(3) { animation-delay: 1.25s; }
-    .hint { margin: 10px 0 0; color: var(--muted); text-align: center; font-size: 13px; }
-    .weekly {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 22px;
-      background: #fff;
-      border: 1px solid var(--line);
+    .slot:nth-child(2) { animation-delay: .6s; }
+    .slot:nth-child(3) { animation-delay: 1.2s; }
+    .slot small { position: absolute; }
+    .tray-caption { margin: 12px 4px 0; color: var(--muted); font-size: 13px; text-align: center; }
+    .screen-cta {
+      margin-top: 14px; min-height: 48px; display: grid; place-items: center;
+      border-radius: 999px; background: var(--matcha); color: #fff; font-weight: 900; font-size: 15px;
     }
-    .bar { height: 12px; border-radius: 999px; background: var(--card-green); overflow: hidden; margin-top: 10px; }
-    .bar span { display: block; width: 66%; height: 100%; background: linear-gradient(90deg, var(--matcha), var(--yellow)); border-radius: inherit; }
     .float-card {
-      position: absolute;
-      width: 190px;
-      padding: 16px;
-      border-radius: 24px;
-      background: rgba(255,255,255,.88);
-      border: 1px solid var(--line);
-      box-shadow: 0 18px 50px rgba(61,107,39,.15);
+      position: absolute; width: 176px; padding: 14px 16px; border-radius: 22px;
+      background: rgba(255,255,255,.92); border: 1px solid var(--line); box-shadow: 0 18px 46px rgba(61,107,39,.16);
     }
-    .float-card.one { left: 0; top: 80px; }
-    .float-card.two { right: 0; bottom: 94px; }
+    .float-card.one { left: -8px; top: 66px; }
+    .float-card.two { right: -8px; bottom: 84px; }
     .float-card b { color: var(--matcha-dark); }
     .float-card p { margin: 4px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
 
-    section { padding: 72px 0; }
-    .section-head { max-width: 720px; margin: 0 auto 34px; text-align: center; }
-    .section-head h2 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -.055em;
-    }
+    /* Sections */
+    section { padding: 74px 0; }
+    .section-head { max-width: 740px; margin: 0 auto 40px; text-align: center; }
+    .section-head h2 { margin: 0 0 14px; font-size: clamp(32px, 4.4vw, 54px); line-height: 1.1; letter-spacing: -.05em; }
     .section-head p { margin: 0; color: var(--muted); font-size: 18px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    .feature {
-      padding: 28px;
-      border-radius: 30px;
-      background: rgba(255,255,255,.74);
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 50px rgba(61,107,39,.07);
-      position: relative;
-      overflow: hidden;
-    }
-    .feature::after {
-      content: "";
-      position: absolute;
-      width: 70px;
-      height: 70px;
-      right: -24px;
-      top: -24px;
-      border-radius: 26px;
-      background: rgba(92, 158, 60, .08);
-      transform: rotate(16deg);
-    }
-    .feature .icon {
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: var(--card-green);
-      font-size: 28px;
-      margin-bottom: 18px;
-    }
-    .feature h3 { margin: 0 0 8px; color: var(--matcha-dark); font-size: 22px; letter-spacing: -.025em; }
-    .feature p { margin: 0; color: var(--muted); }
 
-    .split {
-      display: grid;
-      grid-template-columns: .92fr 1.08fr;
-      gap: 26px;
-      align-items: stretch;
+    /* Reality-check stats */
+    .reality { background: linear-gradient(180deg, #fff, var(--card-green)); border-radius: 44px; padding: 60px 0; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .stat-card {
+      padding: 30px 28px; border-radius: 30px; background: #fff; border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
     }
+    .stat-card .num { display: block; font-size: clamp(48px, 7vw, 76px); line-height: 1; letter-spacing: -.06em; color: var(--matcha-dark); font-weight: 900; }
+    .stat-card .num .unit { font-size: .42em; letter-spacing: -.02em; }
+    .stat-card h3 { margin: 14px 0 6px; font-size: 20px; letter-spacing: -.02em; }
+    .stat-card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .source { margin-top: 26px; text-align: center; color: var(--muted); font-size: 13.5px; }
+    .source a { color: var(--matcha-dark); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Health cost / news quote */
+    .cost { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
+    .quote-card {
+      padding: 34px; border-radius: 32px; background: #fff; border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+    }
+    .quote-card .kicker { color: var(--tomato); font-weight: 900; font-size: 14px; letter-spacing: .02em; }
+    .quote-card blockquote { margin: 14px 0 0; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.5; letter-spacing: -.02em; font-weight: 700; }
+    .quote-card blockquote .mark { color: var(--tomato); }
+    .quote-card .cite { margin-top: auto; padding-top: 22px; color: var(--muted); font-size: 14px; }
+    .quote-card .cite a { color: var(--matcha-dark); text-decoration: underline; text-underline-offset: 2px; }
+    .cost-facts { display: grid; gap: 16px; }
+    .fact {
+      display: flex; gap: 16px; align-items: center; padding: 22px 24px; border-radius: 26px;
+      background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+    }
+    .fact .big { font-size: 40px; font-weight: 900; letter-spacing: -.05em; color: var(--tomato); line-height: 1; min-width: 92px; }
+    .fact b { display: block; letter-spacing: -.02em; }
+    .fact span { color: var(--muted); font-size: 14px; }
+
+    /* Turn / app intro */
+    .turn { text-align: center; }
+    .turn .eyebrow { margin: 0 auto 18px; }
+
+    /* Feature grid */
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .feature {
+      padding: 28px; border-radius: 28px; background: rgba(255,255,255,.8); border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .feature .icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 18px; background: var(--card-green); font-size: 30px; margin-bottom: 16px; }
+    .feature h3 { margin: 0 0 8px; color: var(--matcha-dark); font-size: 21px; letter-spacing: -.025em; }
+    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* Friends / social split */
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 26px; align-items: stretch; }
     .panel {
-      padding: 34px;
-      border-radius: 34px;
-      background: var(--matcha-dark);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+      padding: 40px; border-radius: 36px; color: #fff; position: relative; overflow: hidden;
+      background: radial-gradient(circle at 82% 8%, rgba(255,204,56,.28), transparent 15rem), linear-gradient(135deg, var(--matcha), var(--matcha-dark));
     }
-    .panel::after {
-      content: "";
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      right: -92px;
-      top: -98px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-    }
-    .panel h2 { margin: 0 0 12px; font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -.05em; }
-    .panel p { margin: 0; color: rgba(255,255,255,.78); font-size: 18px; }
-    .challenge-list {
-      display: grid;
-      gap: 14px;
-    }
-    .challenge {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      padding: 18px;
-      border-radius: 26px;
-      background: rgba(255,255,255,.8);
-      border: 1px solid var(--line);
-    }
-    .challenge .avatar {
-      width: 52px;
-      height: 52px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: var(--card-green);
-      font-size: 28px;
-    }
+    .panel h2 { margin: 0 0 14px; font-size: clamp(30px, 3.8vw, 46px); line-height: 1.12; letter-spacing: -.045em; }
+    .panel p { margin: 0 0 22px; color: rgba(255,255,255,.86); font-size: 18px; }
+    .panel .invite { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; background: rgba(255,255,255,.16); font-weight: 800; }
+    .challenge-list { display: grid; gap: 14px; }
+    .challenge { display: flex; gap: 15px; align-items: center; padding: 20px; border-radius: 26px; background: rgba(255,255,255,.82); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+    .challenge .avatar { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 18px; background: var(--card-green); font-size: 28px; flex: none; }
     .challenge b { color: var(--matcha-dark); }
     .challenge span { display: block; color: var(--muted); font-size: 14px; }
 
-    .presskit-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-    .presskit-card {
-      padding: 22px;
-      border-radius: 30px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 50px rgba(61,107,39,.07);
-    }
-    .presskit-card img {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: contain;
-      padding: 18px;
-      border-radius: 22px;
-      background: var(--cream);
-      border: 1px solid rgba(220, 230, 210, .82);
-    }
-    .presskit-card h3 {
-      margin: 16px 0 6px;
-      color: var(--matcha-dark);
-      font-size: 20px;
-      letter-spacing: -.02em;
-    }
-    .presskit-card p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .presskit-card a {
-      color: var(--matcha-dark);
-      font-weight: 900;
-      text-decoration: none;
-    }
+    /* Testimonials */
+    .reviews { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .review { padding: 26px 28px; border-radius: 28px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+    .review-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .review-top .av { width: 48px; height: 48px; border-radius: 999px; background: var(--matcha); color: #fff; display: grid; place-items: center; font-weight: 900; font-size: 20px; }
+    .review-top .who b { display: block; color: var(--matcha-dark); letter-spacing: -.02em; }
+    .review-top .who span { color: var(--muted); font-size: 13px; }
+    .stars { margin-left: auto; color: var(--star); letter-spacing: 2px; font-size: 17px; }
+    .review p { margin: 0; color: var(--ink); font-size: 15.5px; }
 
-    .health {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .health-card {
-      padding: 32px;
-      border-radius: 32px;
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-    .health-card strong {
-      display: block;
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 1;
-      letter-spacing: -.06em;
-      color: var(--matcha-dark);
-    }
-    .health-card p { margin: 12px 0 0; color: var(--muted); }
-    .health-card.accent {
-      background: linear-gradient(135deg, var(--card-green), #fff);
-    }
+    /* Press kit */
+    .presskit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .presskit-card { padding: 22px; border-radius: 28px; background: rgba(255,255,255,.82); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+    .presskit-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; padding: 18px; border-radius: 20px; background: var(--card-green); border: 1px solid rgba(220,230,208,.8); }
+    .presskit-card h3 { margin: 16px 0 6px; color: var(--matcha-dark); font-size: 19px; letter-spacing: -.02em; }
+    .presskit-card p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+    .presskit-card a { color: var(--matcha-dark); font-weight: 900; text-decoration: none; }
 
+    /* Final CTA */
     .final-cta {
-      margin: 44px 0 20px;
-      padding: 52px;
-      border-radius: 42px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 20% 12%, rgba(255,204,56,.25), transparent 18rem),
-        linear-gradient(135deg, var(--matcha), var(--matcha-dark));
-      color: #fff;
-      overflow: hidden;
-      position: relative;
+      margin: 40px 0 18px; padding: 56px; border-radius: 42px; text-align: center; color: #fff;
+      overflow: hidden; position: relative;
+      background: radial-gradient(circle at 20% 12%, rgba(255,204,56,.26), transparent 18rem), linear-gradient(135deg, var(--matcha), var(--matcha-dark));
     }
-    .final-cta h2 { margin: 0 0 14px; font-size: clamp(36px, 5vw, 58px); line-height: 1.05; letter-spacing: -.06em; }
-    .final-cta p { margin: 0 auto 24px; max-width: 640px; color: rgba(255,255,255,.82); font-size: 18px; }
+    .final-cta h2 { margin: 0 0 14px; font-size: clamp(34px, 5vw, 56px); line-height: 1.06; letter-spacing: -.055em; }
+    .final-cta p { margin: 0 auto 26px; max-width: 620px; color: rgba(255,255,255,.86); font-size: 18px; }
     .final-cta .button { background: #fff; color: var(--matcha-dark); }
+    .contact-row { margin-top: 18px; display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; color: rgba(255,255,255,.9); font-size: 15px; }
+    .contact-row a { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
 
-    @keyframes softBounce {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(18px) rotate(8deg); }
-    }
-
-    @keyframes phoneBob {
-      0%, 100% { transform: translateY(0) rotate(.4deg); }
-      50% { transform: translateY(-12px) rotate(-.7deg); }
-    }
-
-    @keyframes slotPeek {
-      0%, 100% { transform: translateY(0) scale(1); }
-      42% { transform: translateY(-5px) scale(1.04); }
-      58% { transform: translateY(0) scale(1); }
-    }
-
-    footer {
-      padding: 32px 0 48px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .footer-links { display: flex; gap: 18px; }
+    /* Footer */
+    footer { padding: 34px 0 48px; color: var(--muted); border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
     .footer-links a { color: var(--matcha-dark); text-decoration: none; font-weight: 700; }
+    .disclaimer { margin-top: 14px; font-size: 12.5px; color: var(--muted); max-width: 780px; line-height: 1.6; }
 
+    /* Animations */
+    @keyframes softBounce { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(16px) rotate(8deg); } }
+    @keyframes phoneBob { 0%, 100% { transform: translateY(0) rotate(.4deg); } 50% { transform: translateY(-12px) rotate(-.7deg); } }
+    @keyframes slotPeek { 0%, 100% { transform: translateY(0) scale(1); } 42% { transform: translateY(-5px) scale(1.04); } 58% { transform: translateY(0) scale(1); } }
+
+    /* Responsive */
     @media (max-width: 920px) {
-      .hero, .split, .health { grid-template-columns: 1fr; }
-      .hero { padding-top: 54px; }
-      .phone-stage { min-height: 590px; }
-      .float-card.one { left: 4px; top: 40px; }
-      .float-card.two { right: 4px; bottom: 48px; }
+      .hero, .split, .cost { grid-template-columns: 1fr; }
+      .hero { padding-top: 50px; }
+      .phone-stage { min-height: 560px; }
+      .float-card.one { left: 2px; top: 34px; }
+      .float-card.two { right: 2px; bottom: 40px; }
       .grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-grid { grid-template-columns: 1fr; }
       .presskit-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 640px) {
       .shell { width: min(100% - 28px, 1120px); }
       header { position: static; }
-      .nav { min-height: 64px; }
       .nav-links a:not(.nav-cta) { display: none; }
-      .hero { gap: 20px; padding: 42px 0 34px; }
-      .proof, .grid { grid-template-columns: 1fr; }
-      .phone-stage { min-height: 548px; }
+      .hero { gap: 20px; padding: 36px 0 30px; }
+      .phone-stage { min-height: 520px; }
       .phone { width: min(320px, 92vw); }
       .float-card { display: none; }
-      .ambient-veges .bg-leafy,
-      .ambient-veges .bg-grid { display: none; }
-      .ambient-veges .bg-logo { right: -118px; top: 78px; }
-      .ambient-veges .bg-root { left: -170px; top: 54%; }
-      section { padding: 48px 0; }
-      .feature, .panel, .health-card { padding: 24px; }
-      .final-cta { padding: 34px 22px; border-radius: 32px; }
+      .grid, .reviews { grid-template-columns: 1fr; }
+      section { padding: 50px 0; }
+      .reality { border-radius: 32px; padding: 44px 0; }
+      .feature, .panel, .stat-card, .quote-card { padding: 26px; }
+      .final-cta { padding: 36px 22px; border-radius: 32px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
-
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-      .ambient-veges img { opacity: .1; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition: none !important; scroll-behavior: auto !important; }
+      .ambient-veges img { opacity: .09; }
     }
   </style>
 </head>
 <body>
   <div class="ambient-veges" aria-hidden="true">
-    <img class="bg-logo" src="assets/bg-lowpoly-bites.png" alt="">
-    <img class="bg-root" src="assets/bg-root-veges.png" alt="">
-    <img class="bg-leafy" src="assets/bg-leafy-grid.png" alt="">
-    <img class="bg-grid" src="assets/bg-vege-grid.png" alt="">
+    <img class="bg-a" src="assets/bg-root-veges.png" alt="">
+    <img class="bg-b" src="assets/bg-leafy-grid.png" alt="">
+    <img class="bg-c" src="assets/bg-vege-grid.png" alt="">
   </div>
+
   <header>
     <nav class="shell nav" aria-label="主選單">
       <a class="brand" href="#">
@@ -599,139 +320,228 @@
         <span>吃菜吧</span>
       </a>
       <div class="nav-links">
-        <a href="#features">功能</a>
-        <a href="#social">好友挑戰</a>
-        <a href="#presskit">媒體素材庫</a>
-        <a href="privacy.html">隱私條款</a>
+        <a href="#reality">現況</a>
+        <a href="#app">怎麼玩</a>
+        <a href="#friends">好友挑戰</a>
+        <a href="https://github.com/EatVege" target="_blank" rel="noopener">GitHub</a>
         <a class="nav-cta" href="#download">即將上架</a>
       </div>
     </nav>
   </header>
 
   <main>
+    <!-- HERO：反問開場 -->
     <section class="shell hero">
       <div>
-        <div class="eyebrow">免費 iOS App · 健康 × 輕社交</div>
-        <h1>每天 3 樣菜，<span class="gradient-text">吃完賺 V 點。</span></h1>
-        <p class="lead">吃菜吧把吃菜變成每日小任務：2 樣你選，1 樣命運抽。吃完打卡、累積連續天數，再用 V 點換菜或指定好友一起吃。</p>
+        <div class="eyebrow">🥗 停一下，想一想</div>
+        <h1>你今天，<br><span class="hl">真的吃到菜了嗎？</span></h1>
+        <p class="lead">不是有配一點蔥花、番茄醬就算。回想一下今天三餐——你吃到的「深綠色蔬菜」，超過一份了嗎？多數人以為有吃，其實遠遠不夠。</p>
         <div class="cta-row">
           <a class="button primary" href="#download">App Store 即將上架</a>
-          <a class="button secondary" href="#features">看看怎麼玩</a>
+          <a class="button secondary" href="#reality">先看看數據</a>
         </div>
-        <p class="fineprint">Sign in with Apple 登入。可設定不吃的菜、刪除帳號，V 點不需課金。</p>
-
-        <div class="proof" aria-label="產品重點">
-          <div class="proof-card"><strong>3 樣</strong><span>2 自選 + 1 命運抽</span></div>
-          <div class="proof-card"><strong>V 點</strong><span>打卡、換菜、發挑戰</span></div>
-          <div class="proof-card"><strong>好友</strong><span>指定挑戰與雙人任務</span></div>
-        </div>
+        <p class="fineprint">吃菜吧 · 免費 iOS App｜把吃菜變成每天做得到的小任務。</p>
       </div>
 
       <div class="phone-stage" aria-label="App 畫面示意">
         <div class="blob" aria-hidden="true"></div>
         <div class="float-card one">
           <b>🎲 命運抽菜</b>
-          <p>每天固定一格交給隨機蔬菜。</p>
+          <p>每天固定一格，交給隨機蔬菜。</p>
         </div>
         <div class="phone">
           <div class="screen">
-            <div class="screen-top">
-              <div class="screen-title">
-                <strong>今日菜單</strong>
-                <span>今天，慢慢吃也很好</span>
-              </div>
-              <div class="v-badge">V 45</div>
+            <div class="screen-head"><small>今日菜單</small><small>1 / 3</small></div>
+            <div class="screen-progress"><span></span></div>
+            <h2>今天的三樣菜<br>吃完就打勾</h2>
+            <div class="tray">
+              <div class="slot" aria-label="菠菜">🥬</div>
+              <div class="slot" aria-label="紅蘿蔔">🥕</div>
+              <div class="slot" aria-label="番茄">🍅</div>
             </div>
-            <div class="task-card">
-              <div class="task-head">
-                <span>🍴 每日任務</span>
-                <span>1 / 3</span>
-              </div>
-              <div class="tray">
-                <div class="vege-slot" aria-label="菠菜">🥬</div>
-                <div class="vege-slot" aria-label="紅蘿蔔">🥕</div>
-                <div class="vege-slot" aria-label="番茄">🍅</div>
-              </div>
-              <p class="hint">吃完一樣菜，就點一下餐盤裡的菜</p>
-            </div>
-            <div class="weekly">
-              <strong>每週全達成</strong>
-              <div class="bar"><span></span></div>
-              <p class="hint">連續 7 天完成，額外獲得 V 點</p>
-            </div>
+            <p class="tray-caption">2 樣自選 · 1 樣命運抽</p>
+            <div class="screen-cta">吃完一樣，點一下 ✓</div>
           </div>
         </div>
         <div class="float-card two">
-          <b>👥 雙人菜單</b>
-          <p>和好友吃同一組菜，連續三週拿獎勵。</p>
+          <b>👥 揪好友一起</b>
+          <p>指定親友今天吃某樣菜，一起養習慣。</p>
         </div>
       </div>
     </section>
 
-    <section id="features" class="shell">
+    <!-- REALITY：官方數據 -->
+    <section id="reality" class="shell">
+      <div class="reality">
+        <div class="shell" style="width:min(1040px, calc(100% - 48px))">
+          <div class="section-head">
+            <div class="eyebrow" style="margin:0 auto 16px">📊 這不是你一個人的問題</div>
+            <h2>近 9 成國人，<br>蔬果其實都吃不夠。</h2>
+            <p>根據衛福部國民健康署的國民營養調查，多數人每天連基本的蔬菜份量都沒吃到。看完數字，再回頭想想自己的今天。</p>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span class="num">86<span class="unit">%</span></span>
+              <h3>蔬菜吃不夠</h3>
+              <p>19–64 歲成人中，每日蔬菜攝取量「不足 3 份」的比例高達 86%；水果不足 2 份同樣達 86%。</p>
+            </div>
+            <div class="stat-card">
+              <span class="num">3<span class="unit"> 份</span></span>
+              <h3>每天最低建議</h3>
+              <p>國健署「我的餐盤」建議每天至少 3 份蔬菜，且深色蔬菜（深綠、黃橙紅）要占 1/3 以上。</p>
+            </div>
+            <div class="stat-card">
+              <span class="num">400<span class="unit">g</span></span>
+              <h3>WHO 全球標準</h3>
+              <p>世界衛生組織建議每人每天至少攝取 400 公克蔬果；全球因蔬果吃太少，付出的健康代價以百萬計。</p>
+            </div>
+          </div>
+          <p class="source">
+            資料來源：<a href="https://www.mohw.gov.tw/cp-3794-41108-1.html" target="_blank" rel="noopener">衛生福利部國民健康署「我的餐盤」新聞稿（2018）</a>
+            ·
+            <a href="https://www.who.int/tools/elena/commentary/fruit-vegetables-ncds" target="_blank" rel="noopener">World Health Organization（WHO）</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COST：健康代價 / 新聞引用 -->
+    <section class="shell">
       <div class="section-head">
-        <h2>只保留會讓你想打開 App 的事。</h2>
-        <p>每日菜單、V 點、好友挑戰、統計提醒；功能都來自目前 iOS app 實作。</p>
+        <h2>吃不夠菜，<br>身體會慢慢記帳。</h2>
+        <p>蔬菜吃太少、膳食纖維長期不足，不只是「感覺不健康」而已——它正實際反映在國人的疾病數字上。</p>
+      </div>
+
+      <div class="cost">
+        <div class="quote-card">
+          <span class="kicker">新聞報導 · 2025</span>
+          <blockquote><span class="mark">「</span>台灣人罹患大腸癌的機率，高居亞洲第一、全球第六；約每半個小時，就新增一名大腸癌患者。<span class="mark">」</span></blockquote>
+          <p class="cite">
+            醫師指出，主因之一是「蔬菜未達足夠攝取量，普遍缺乏膳食纖維」，加上高油、高糖飲食。<br>
+            —— <a href="https://www.chinatimes.com/realtimenews/20250805002754-260418" target="_blank" rel="noopener">中時新聞網《腸癌全球第 6 肥胖者風險增 45%》</a>
+          </p>
+        </div>
+
+        <div class="cost-facts">
+          <div class="fact">
+            <div class="big">No.1</div>
+            <div>
+              <b>大腸癌發生率 亞洲第一</b>
+              <span>台灣大腸癌發生率高居亞洲第一、全球第六。</span>
+            </div>
+          </div>
+          <div class="fact">
+            <div class="big">30<span style="font-size:.5em">分</span></div>
+            <div>
+              <b>每半小時 +1 名患者</b>
+              <span>大腸癌新增速度，約每 30 分鐘就多一人。</span>
+            </div>
+          </div>
+          <div class="fact">
+            <div class="big">＋纖維</div>
+            <div>
+              <b>從一餐多一樣菜開始</b>
+              <span>醫師建議多吃深綠色蔬菜等高纖食物，降低風險。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TURN：吃菜吧登場 -->
+    <section id="app" class="shell turn">
+      <div class="eyebrow">🥕 那，該怎麼開始？</div>
+      <div class="section-head">
+        <h2>你不是不自律，<br>是需要更容易開始。</h2>
+        <p>吃菜吧是一款「養成吃菜習慣」的 App。它把「我要吃健康一點」拆成每天 3 個做得到的小動作——不用記熱量、不用算克數，先把今天這一盤吃完就好。</p>
       </div>
 
       <div class="grid">
         <article class="feature">
           <div class="icon">🍱</div>
           <h3>今日三樣菜</h3>
-          <p>2 樣自選、1 樣命運抽。吃完一樣，就點一下餐盤裡的菜。</p>
+          <p>2 樣自選、1 樣命運抽。不再每餐重新煩惱要吃什麼。</p>
+        </article>
+        <article class="feature">
+          <div class="icon">✅</div>
+          <h3>吃完就打卡</h3>
+          <p>吃完一樣就點一下，累積連續天數，把習慣養起來。</p>
         </article>
         <article class="feature">
           <div class="icon">🪙</div>
           <h3>V 點換菜</h3>
-          <p>完成任務賺 V 點；可重抽隨機菜，也可直接指定想吃的菜。</p>
+          <p>完成任務賺 V 點，可重抽隨機菜，或直接指定想吃的菜。</p>
         </article>
         <article class="feature">
-          <div class="icon">👫</div>
-          <h3>好友指定挑戰</h3>
-          <p>用邀請碼加好友，指定對方今天吃某樣菜；會避開對方不吃的菜。</p>
-        </article>
-        <article class="feature">
-          <div class="icon">📱</div>
-          <h3>統計與提醒</h3>
-          <p>追蹤連續天數、週/月完成、好友 V 點排行榜，並支援本地提醒與 Widget。</p>
+          <div class="icon">🥦</div>
+          <h3>深綠色任務</h3>
+          <p>不用研究營養表，也知道這週有沒有吃得太單一。</p>
         </article>
       </div>
     </section>
 
-    <section id="social" class="shell">
+    <!-- FRIENDS：好友挑戰 -->
+    <section id="friends" class="shell">
       <div class="split">
         <div class="panel">
-          <h2>一個人容易忘，找朋友比較會完成。</h2>
-          <p>好友挑戰、雙人菜單、V 點排行榜，把「今天吃菜」變成可以互相推一把的小遊戲。</p>
+          <h2>一個人容易停，<br>揪人一起比較撐得住。</h2>
+          <p>吃菜吧有好友挑戰模式：可以自己玩，也可以邀爸媽、伴侶、同事一起。互相指定今天吃什麼菜，一起養成吃菜習慣，前三天不再孤單。</p>
+          <span class="invite">🔗 用邀請碼加好友，一起開始</span>
         </div>
         <div class="challenge-list">
           <div class="challenge">
             <div class="avatar">🥦</div>
-            <div><b>阿杰指定你今天吃青花菜</b><span>接受挑戰，完成後獲得 V 點獎勵。</span></div>
+            <div><b>阿杰指定你今天吃青花菜</b><span>接受挑戰，完成後獲得 V 點獎勵（會避開你不吃的菜）。</span></div>
           </div>
           <div class="challenge">
-            <div class="avatar">👥</div>
-            <div><b>雙人菜單進行中</b><span>兩人吃同一組菜，完成後各得獎勵。</span></div>
+            <div class="avatar">👨‍👩‍👧</div>
+            <div><b>和家人一起吃菜</b><span>邀爸媽或伴侶加入，把「今天吃菜了嗎」變成共同話題。</span></div>
           </div>
           <div class="challenge">
             <div class="avatar">🏆</div>
-            <div><b>好友 V 點排行榜</b><span>看誰真的有打卡完成。</span></div>
+            <div><b>好友 V 點排行榜</b><span>看看誰真的有打卡完成，互相推一把。</span></div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- REVIEWS -->
+    <section class="shell">
+      <div class="section-head">
+        <h2>從「想到已經太晚」<br>到「至少記得補一樣」。</h2>
+      </div>
+      <div class="reviews">
+        <div class="review">
+          <div class="review-top">
+            <div class="av">M</div>
+            <div class="who"><b>常外食上班族</b><span>新手使用者</span></div>
+            <div class="stars" aria-label="5 顆星">★★★★★</div>
+          </div>
+          <p>我以前都到晚餐才發現今天幾乎沒吃菜。現在先看今日菜單，至少會記得補一樣。</p>
+        </div>
+        <div class="review">
+          <div class="review-top">
+            <div class="av">K</div>
+            <div class="who"><b>想吃均衡的新手</b><span>新手使用者</span></div>
+            <div class="stars" aria-label="5 顆星">★★★★★</div>
+          </div>
+          <p>深綠色任務很有用，不用研究營養表，也知道這週有沒有吃得太單一。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESS KIT -->
     <section id="presskit" class="shell">
       <div class="section-head">
         <h2>媒體素材庫</h2>
         <p>提供吃菜吧 logo 與低多邊形蔬菜素材，可用於介紹、報導與社群分享。</p>
       </div>
-
       <div class="presskit-grid">
         <article class="presskit-card">
           <img src="assets/eatvege-logo.png" alt="吃菜吧 logo">
-          <h3>Logo</h3>
-          <p>低多邊形蔬菜圖標，適合品牌露出。</p>
+          <h3>Logo（透明背景）</h3>
+          <p>低多邊形蔬菜圖標，去背 PNG，適合品牌露出。</p>
           <a href="assets/eatvege-logo.png" download>下載 PNG</a>
         </article>
         <article class="presskit-card">
@@ -749,22 +559,34 @@
       </div>
     </section>
 
+    <!-- DOWNLOAD / CONTACT -->
     <section id="download" class="shell">
       <div class="final-cta">
-        <h2>把今天的三樣菜吃完。</h2>
-        <p>吃菜吧 iOS 版即將上架 App Store。App 內健康提醒依據衛福部國民健康署每日飲食指南：每天吃足 3～5 份蔬菜，並多選深色蔬菜。</p>
-        <a class="button" href="mailto:k66inthesky@gmail.com?subject=EatVege%20上架通知">收到上架通知</a>
+        <h2>今天，先吃完三樣菜。</h2>
+        <p>吃菜吧 iOS 版即將上架 App Store。與其等到體檢報告才後悔，不如從今天的一盤菜開始，揪上親友一起養成習慣。</p>
+        <a class="button" href="mailto:k66@k66.ninja?subject=EatVege%20上架通知">收到上架通知</a>
+        <div class="contact-row">
+          <span>💻 開源專案：<a href="https://github.com/EatVege" target="_blank" rel="noopener">github.com/EatVege</a></span>
+          <span>✉️ 聯繫團隊：<a href="mailto:k66@k66.ninja">k66@k66.ninja</a></span>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="shell footer-inner">
-      <div>© 2026 EatVege. 讓每天吃菜變簡單。</div>
-      <div class="footer-links">
-        <a href="privacy.html">隱私權政策</a>
-        <a href="support.html">支援</a>
+    <div class="shell">
+      <div class="footer-inner">
+        <div>© 2026 EatVege 吃菜吧. 讓每天吃菜變簡單。</div>
+        <div class="footer-links">
+          <a href="https://github.com/EatVege" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:k66@k66.ninja">聯繫團隊</a>
+          <a href="privacy.html">隱私權政策</a>
+          <a href="support.html">支援</a>
+        </div>
       </div>
+      <p class="disclaimer">
+        本頁引用之統計與報導僅供健康促進與衛教參考，來源為衛生福利部國民健康署、世界衛生組織（WHO）及公開新聞報導，相關數字以各原始來源公告為準。吃菜吧為飲食習慣養成工具，非醫療器材，不提供醫療診斷或治療建議；如有健康疑慮請諮詢專業醫療人員。
+      </p>
     </div>
   </footer>
 </body>
