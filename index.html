@@ -435,6 +435,44 @@
     .challenge b { color: var(--matcha-dark); }
     .challenge span { display: block; color: var(--muted); font-size: 14px; }
 
+    .presskit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .presskit-card {
+      padding: 22px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 50px rgba(61,107,39,.07);
+    }
+    .presskit-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: contain;
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--cream);
+      border: 1px solid rgba(220, 230, 210, .82);
+    }
+    .presskit-card h3 {
+      margin: 16px 0 6px;
+      color: var(--matcha-dark);
+      font-size: 20px;
+      letter-spacing: -.02em;
+    }
+    .presskit-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .presskit-card a {
+      color: var(--matcha-dark);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
     .health {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -513,6 +551,7 @@
       .float-card.one { left: 4px; top: 40px; }
       .float-card.two { right: 4px; bottom: 48px; }
       .grid { grid-template-columns: repeat(2, 1fr); }
+      .presskit-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -562,6 +601,8 @@
       <div class="nav-links">
         <a href="#features">功能</a>
         <a href="#social">好友挑戰</a>
+        <a href="#presskit">媒體素材庫</a>
+        <a href="privacy.html">隱私條款</a>
         <a class="nav-cta" href="#download">即將上架</a>
       </div>
     </nav>
@@ -677,6 +718,34 @@
             <div><b>好友 V 點排行榜</b><span>看誰真的有打卡完成。</span></div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="presskit" class="shell">
+      <div class="section-head">
+        <h2>媒體素材庫</h2>
+        <p>提供吃菜吧 logo 與低多邊形蔬菜素材，可用於介紹、報導與社群分享。</p>
+      </div>
+
+      <div class="presskit-grid">
+        <article class="presskit-card">
+          <img src="assets/eatvege-logo.png" alt="吃菜吧 logo">
+          <h3>Logo</h3>
+          <p>低多邊形蔬菜圖標，適合品牌露出。</p>
+          <a href="assets/eatvege-logo.png" download>下載 PNG</a>
+        </article>
+        <article class="presskit-card">
+          <img src="assets/bg-root-veges.png" alt="根莖類蔬菜素材">
+          <h3>蔬菜主視覺</h3>
+          <p>胡蘿蔔、葉菜與根莖類素材。</p>
+          <a href="assets/bg-root-veges.png" download>下載 PNG</a>
+        </article>
+        <article class="presskit-card">
+          <img src="assets/bg-leafy-grid.png" alt="葉菜素材集合">
+          <h3>葉菜素材</h3>
+          <p>App 內風格延伸的葉菜圖像集合。</p>
+          <a href="assets/bg-leafy-grid.png" download>下載 PNG</a>
+        </article>
       </div>
     </section>
 
