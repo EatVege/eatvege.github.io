@@ -26,13 +26,14 @@
       --star: #FFC01E;
       --shadow-sm: 0 10px 30px rgba(61, 107, 39, .10);
       --shadow: 0 26px 70px rgba(61, 107, 39, .16);
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
+      font-family: var(--font);
       color: var(--ink);
       background:
         radial-gradient(circle at 10% 4%, rgba(92, 158, 60, .14), transparent 26rem),
@@ -46,6 +47,14 @@
     a { color: inherit; }
     .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
     header, main, footer { position: relative; z-index: 1; }
+
+    /* 低多邊形圖示 */
+    .ic { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -.22em; flex: none; }
+    .eyebrow .ic { width: 18px; height: 18px; vertical-align: -.28em; }
+    .slot .ic { width: 46px; height: 46px; }
+    .feature .icon .ic { width: 34px; height: 34px; }
+    .challenge .avatar .ic { width: 34px; height: 34px; }
+    .float-card .ic, .invite .ic, .contact-row .ic { width: 20px; height: 20px; vertical-align: -.28em; }
 
     /* Ambient low-poly veggies */
     .ambient-veges { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -180,7 +189,7 @@
     .stat-card .num .unit { font-size: .42em; letter-spacing: -.02em; }
     .stat-card h3 { margin: 14px 0 6px; font-size: 20px; letter-spacing: -.02em; }
     .stat-card p { margin: 0; color: var(--muted); font-size: 15px; }
-    .source { margin-top: 26px; text-align: center; color: var(--muted); font-size: 13.5px; }
+    .source { margin-top: 26px; text-align: center; color: var(--muted); font-size: 14px; }
     .source a { color: var(--matcha-dark); text-decoration: underline; text-underline-offset: 2px; }
 
     /* Health cost / news quote */
@@ -240,7 +249,7 @@
     .review-top .who b { display: block; color: var(--matcha-dark); letter-spacing: -.02em; }
     .review-top .who span { color: var(--muted); font-size: 13px; }
     .stars { margin-left: auto; color: var(--star); letter-spacing: 2px; font-size: 17px; }
-    .review p { margin: 0; color: var(--ink); font-size: 15.5px; }
+    .review p { margin: 0; color: var(--ink); font-size: 15px; }
 
     /* Press kit */
     .presskit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -267,7 +276,7 @@
     .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
     .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
     .footer-links a { color: var(--matcha-dark); text-decoration: none; font-weight: 700; }
-    .disclaimer { margin-top: 14px; font-size: 12.5px; color: var(--muted); max-width: 780px; line-height: 1.6; }
+    .disclaimer { margin-top: 14px; font-size: 13px; color: var(--muted); max-width: 780px; line-height: 1.6; }
 
     /* Animations */
     @keyframes softBounce { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(16px) rotate(8deg); } }
@@ -307,6 +316,121 @@
   </style>
 </head>
 <body>
+  <!-- 低多邊形蔬菜圖示 sprite（對齊 App icon 風格） -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-cabbage" viewBox="0 0 64 64">
+        <path d="M32 7 L51 16 L57 35 L46 53 L18 53 L7 35 L13 16 Z" fill="#7FB84E"/>
+        <path d="M32 12 L47 19 L52 35 L43 49 L21 49 L12 35 L17 19 Z" fill="#95C85E"/>
+        <path d="M32 18 L43 23 L47 35 L40 46 L24 46 L17 35 L21 23 Z" fill="#AFD680"/>
+        <g stroke="#69A542" stroke-width="1.7" fill="none" stroke-linecap="round">
+          <path d="M32 12 V47"/><path d="M32 20 L20 28"/><path d="M32 20 L44 28"/><path d="M32 32 L22 41"/><path d="M32 32 L42 41"/>
+        </g>
+      </symbol>
+      <symbol id="i-carrot" viewBox="0 0 64 64">
+        <g fill="#5C9E3C"><path d="M32 22 C29 13 24 11 21 8 C24 13 26 17 28 23 Z"/><path d="M32 22 C35 13 40 11 43 8 C40 13 38 17 36 23 Z"/></g>
+        <path d="M32 23 C32 14 32 10 32 7 C34 12 34 18 33 23 Z" fill="#3C6B2E"/>
+        <path d="M22 24 L42 24 L34 52 L32 57 L30 52 Z" fill="#E58128"/>
+        <path d="M32 24 L42 24 L34 52 L32 57 Z" fill="#D06E1C"/>
+        <g stroke="#C4611A" stroke-width="1.6" stroke-linecap="round"><path d="M26 31 L37 30"/><path d="M28 39 L36 38"/></g>
+      </symbol>
+      <symbol id="i-tomato" viewBox="0 0 64 64">
+        <path d="M32 20 L49 28 L47 46 L32 55 L17 46 L15 28 Z" fill="#E65A40"/>
+        <path d="M32 20 L49 28 L47 46 L32 55 Z" fill="#C7412B"/>
+        <path d="M32 20 L17 28 L15 28 L20 24 Z" fill="#EE7259"/>
+        <path d="M32 25 L27 17 L31 21 L32 12 L33 21 L37 17 Z" fill="#5C9E3C"/>
+        <path d="M32 12 L34 10" stroke="#3C6B2E" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="i-broccoli" viewBox="0 0 64 64">
+        <path d="M27 34 H37 L35 54 H29 Z" fill="#C9D9A8"/>
+        <path d="M32 40 L24 34 M32 40 L40 34" stroke="#B7CB92" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#5F9A3E"><circle cx="23" cy="27" r="9"/><circle cx="41" cy="27" r="9"/><circle cx="32" cy="19" r="10"/><circle cx="32" cy="31" r="9"/></g>
+        <g fill="#6FB44E"><circle cx="26" cy="22" r="3.4"/><circle cx="38" cy="22" r="3.4"/><circle cx="32" cy="28" r="3.4"/><circle cx="20" cy="29" r="3"/><circle cx="44" cy="29" r="3"/></g>
+      </symbol>
+      <symbol id="i-eggplant" viewBox="0 0 64 64">
+        <path d="M41 23 C51 30 49 50 34 54 C21 57 15 43 22 33 C27 26 34 25 41 23 Z" fill="#7E4FA0"/>
+        <path d="M41 23 C51 30 49 50 34 54 C35 44 34 31 41 23 Z" fill="#603A82"/>
+        <path d="M39 22 C34 15 29 15 25 19 C30 19 34 21 37 26 Z" fill="#5C9E3C"/>
+        <path d="M40 21 L45 12" stroke="#3C6B2E" stroke-width="3.4" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="i-mushroom" viewBox="0 0 64 64">
+        <path d="M26 37 H38 L36 53 H28 Z" fill="#EBE2CD"/>
+        <path d="M32 37 H38 L36 53 H32 Z" fill="#D6C9AC"/>
+        <path d="M13 35 C15 22 25 15 32 15 C39 15 49 22 51 35 C42 39 22 39 13 35 Z" fill="#8A6A46"/>
+        <path d="M32 15 C39 15 49 22 51 35 C42 38.5 37 39 32 39 Z" fill="#6F5436"/>
+        <g stroke="#5B4229" stroke-width="1.5" fill="none" stroke-linecap="round"><path d="M24 33 L27 23"/><path d="M40 33 L37 23"/></g>
+      </symbol>
+      <symbol id="i-edamame" viewBox="0 0 64 64">
+        <path d="M16 43 C10 29 24 15 40 17 C51 18 54 28 47 33 C41 37 44 45 33 47 C24 48 20 48 16 43 Z" fill="#93C455"/>
+        <path d="M16 43 C10 29 24 15 40 17 C44 22 30 24 27 33 C25 40 24 45 22 47 C20 47 18 45 16 43 Z" fill="#A6D06B"/>
+        <g fill="#4E7E2E"><circle cx="27" cy="32" r="2.6"/><circle cx="36" cy="28" r="2.6"/><circle cx="33" cy="39" r="2.6"/></g>
+      </symbol>
+      <symbol id="i-spinach" viewBox="0 0 64 64">
+        <g fill="none" stroke="#7FB84E" stroke-width="3.4" stroke-linecap="round">
+          <path d="M30 55 C30 41 27 29 22 19"/><path d="M34 55 C34 42 39 31 44 21"/>
+        </g>
+        <g fill="#69A542"><path d="M22 19 C17 17 14 19 12 22 C16 23 19 22 23 22 Z"/><path d="M44 21 C49 19 52 21 54 24 C50 25 47 24 43 24 Z"/><path d="M32 40 C27 38 24 40 22 43 C26 44 29 43 33 43 Z"/></g>
+      </symbol>
+      <symbol id="i-logo" viewBox="0 0 64 64">
+        <path d="M32 8 L48 17 L48 35 L32 44 L16 35 L16 17 Z" fill="#6FAE4C"/>
+        <path d="M32 15 L42 21 L42 33 L32 39 L22 33 L22 21 Z" fill="#EDF4E6"/>
+        <path d="M32 44 L32 56 M32 50 C28 48 25 50 24 53 C28 54 30 53 32 51 M32 48 C36 46 39 48 40 51 C36 52 34 51 32 49" stroke="#3C6B2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </symbol>
+      <!-- 功能性圖示（同霧面配色） -->
+      <symbol id="i-plate" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="22" fill="#EDF4E6" stroke="#CFE0BE" stroke-width="2.5"/>
+        <path d="M25 29 L20 26 L25 24 L27 20 L30 24 L33 27 Z" fill="#7FB84E"/>
+        <path d="M40 24 L36 34 L34 24 Z" fill="#E58128"/>
+        <path d="M32 44 L26 40 L28 34 L36 34 L38 40 Z" fill="#E65A40"/>
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="22" fill="#5C9E3C"/>
+        <path d="M21 33 L29 41 L44 24" stroke="#fff" stroke-width="5.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-coin" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="22" fill="#FFCC38"/>
+        <circle cx="32" cy="32" r="22" fill="none" stroke="#E6B01C" stroke-width="3"/>
+        <path d="M24 23 L32 42 L40 23" stroke="#8A6A14" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-dice" viewBox="0 0 64 64">
+        <rect x="14" y="14" width="36" height="36" rx="10" fill="#6FA84B"/>
+        <g fill="#fff"><circle cx="24" cy="24" r="3.5"/><circle cx="40" cy="24" r="3.5"/><circle cx="32" cy="32" r="3.5"/><circle cx="24" cy="40" r="3.5"/><circle cx="40" cy="40" r="3.5"/></g>
+      </symbol>
+      <symbol id="i-friends" viewBox="0 0 64 64">
+        <circle cx="42" cy="25" r="8" fill="#8FC060"/><path d="M30 50 C30 40 36 36 42 36 C48 36 54 40 54 50 Z" fill="#8FC060"/>
+        <circle cx="23" cy="24" r="9" fill="#5C9E3C"/><path d="M9 51 C9 39 16 34 23 34 C30 34 37 39 37 51 Z" fill="#5C9E3C"/>
+      </symbol>
+      <symbol id="i-trophy" viewBox="0 0 64 64">
+        <path d="M21 14 H43 V25 C43 34 37 39 32 39 C27 39 21 34 21 25 Z" fill="#FFCC38"/>
+        <path d="M21 18 H14 C14 26 18 29 23 29 M43 18 H50 C50 26 46 29 41 29" stroke="#5C9E3C" stroke-width="3.4" fill="none"/>
+        <rect x="28" y="39" width="8" height="7" fill="#3C6B2E"/><rect x="20" y="46" width="24" height="6" rx="3" fill="#5C9E3C"/>
+      </symbol>
+      <symbol id="i-link" viewBox="0 0 64 64">
+        <g stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round">
+          <path d="M31 21 L36 16 C40 12 47 12 51 16 C55 20 55 27 51 31 L46 36"/>
+          <path d="M33 43 L28 48 C24 52 17 52 13 48 C9 44 9 37 13 33 L18 28"/>
+          <path d="M26 38 L38 26"/>
+        </g>
+      </symbol>
+      <symbol id="i-chart" viewBox="0 0 64 64">
+        <g fill="#5C9E3C"><rect x="15" y="34" width="9" height="16" rx="2.5"/><rect x="28" y="24" width="9" height="26" rx="2.5"/><rect x="41" y="15" width="9" height="35" rx="2.5" fill="#8FC060"/></g>
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 64 64">
+        <g stroke="currentColor" stroke-width="4.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M24 21 L13 32 L24 43"/><path d="M40 21 L51 32 L40 43"/></g>
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 64 64">
+        <rect x="11" y="17" width="42" height="30" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+        <path d="M13 21 L32 35 L51 21" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-at" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round">
+          <path d="M43 43 C39 47 33 48 28 46 C20 43 17 34 20 26 C24 17 34 14 42 18 C49 21 51 29 48 35 C46 39 41 40 39 36 C38 34 38 30 38 27"/>
+          <circle cx="32" cy="32" r="7"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <div class="ambient-veges" aria-hidden="true">
     <img class="bg-a" src="assets/bg-root-veges.png" alt="">
     <img class="bg-b" src="assets/bg-leafy-grid.png" alt="">
@@ -334,7 +458,7 @@
     <!-- HERO：反問開場 -->
     <section class="shell hero">
       <div>
-        <div class="eyebrow">🥗 停一下，想一想</div>
+        <div class="eyebrow"><svg class="ic"><use href="#i-cabbage"/></svg>停一下，想一想</div>
         <h1>你今天，<br><span class="hl">真的吃到菜了嗎？</span></h1>
         <p class="lead">不是有配一點蔥花、番茄醬就算。回想一下今天三餐——你吃到的「深綠色蔬菜」，超過一份了嗎？多數人以為有吃，其實遠遠不夠。</p>
         <div class="cta-row">
@@ -347,7 +471,7 @@
       <div class="phone-stage" aria-label="App 畫面示意">
         <div class="blob" aria-hidden="true"></div>
         <div class="float-card one">
-          <b>🎲 命運抽菜</b>
+          <b><svg class="ic"><use href="#i-dice"/></svg> 命運抽菜</b>
           <p>每天固定一格，交給隨機蔬菜。</p>
         </div>
         <div class="phone">
@@ -356,16 +480,16 @@
             <div class="screen-progress"><span></span></div>
             <h2>今天的三樣菜<br>吃完就打勾</h2>
             <div class="tray">
-              <div class="slot" aria-label="菠菜">🥬</div>
-              <div class="slot" aria-label="紅蘿蔔">🥕</div>
-              <div class="slot" aria-label="番茄">🍅</div>
+              <div class="slot" role="img" aria-label="高麗菜"><svg class="ic"><use href="#i-cabbage"/></svg></div>
+              <div class="slot" role="img" aria-label="紅蘿蔔"><svg class="ic"><use href="#i-carrot"/></svg></div>
+              <div class="slot" role="img" aria-label="番茄"><svg class="ic"><use href="#i-tomato"/></svg></div>
             </div>
             <p class="tray-caption">2 樣自選 · 1 樣命運抽</p>
             <div class="screen-cta">吃完一樣，點一下 ✓</div>
           </div>
         </div>
         <div class="float-card two">
-          <b>👥 揪好友一起</b>
+          <b><svg class="ic"><use href="#i-friends"/></svg> 揪好友一起</b>
           <p>指定親友今天吃某樣菜，一起養習慣。</p>
         </div>
       </div>
@@ -376,7 +500,7 @@
       <div class="reality">
         <div class="shell" style="width:min(1040px, calc(100% - 48px))">
           <div class="section-head">
-            <div class="eyebrow" style="margin:0 auto 16px">📊 這不是你一個人的問題</div>
+            <div class="eyebrow" style="margin:0 auto 16px"><svg class="ic"><use href="#i-chart"/></svg>這不是你一個人的問題</div>
             <h2>近 9 成國人，<br>蔬果其實都吃不夠。</h2>
             <p>根據衛福部國民健康署的國民營養調查，多數人每天連基本的蔬菜份量都沒吃到。看完數字，再回頭想想自己的今天。</p>
           </div>
@@ -452,7 +576,7 @@
 
     <!-- TURN：吃菜吧登場 -->
     <section id="app" class="shell turn">
-      <div class="eyebrow">🥕 那，該怎麼開始？</div>
+      <div class="eyebrow"><svg class="ic"><use href="#i-carrot"/></svg>那，該怎麼開始？</div>
       <div class="section-head">
         <h2>你不是不自律，<br>是需要更容易開始。</h2>
         <p>吃菜吧是一款「養成吃菜習慣」的 App。它把「我要吃健康一點」拆成每天 3 個做得到的小動作——不用記熱量、不用算克數，先把今天這一盤吃完就好。</p>
@@ -460,22 +584,22 @@
 
       <div class="grid">
         <article class="feature">
-          <div class="icon">🍱</div>
+          <div class="icon"><svg class="ic"><use href="#i-plate"/></svg></div>
           <h3>今日三樣菜</h3>
           <p>2 樣自選、1 樣命運抽。不再每餐重新煩惱要吃什麼。</p>
         </article>
         <article class="feature">
-          <div class="icon">✅</div>
+          <div class="icon"><svg class="ic"><use href="#i-check"/></svg></div>
           <h3>吃完就打卡</h3>
           <p>吃完一樣就點一下，累積連續天數，把習慣養起來。</p>
         </article>
         <article class="feature">
-          <div class="icon">🪙</div>
+          <div class="icon"><svg class="ic"><use href="#i-coin"/></svg></div>
           <h3>V 點換菜</h3>
           <p>完成任務賺 V 點，可重抽隨機菜，或直接指定想吃的菜。</p>
         </article>
         <article class="feature">
-          <div class="icon">🥦</div>
+          <div class="icon"><svg class="ic"><use href="#i-broccoli"/></svg></div>
           <h3>深綠色任務</h3>
           <p>不用研究營養表，也知道這週有沒有吃得太單一。</p>
         </article>
@@ -488,19 +612,19 @@
         <div class="panel">
           <h2>一個人容易停，<br>揪人一起比較撐得住。</h2>
           <p>吃菜吧有好友挑戰模式：可以自己玩，也可以邀爸媽、伴侶、同事一起。互相指定今天吃什麼菜，一起養成吃菜習慣，前三天不再孤單。</p>
-          <span class="invite">🔗 用邀請碼加好友，一起開始</span>
+          <span class="invite"><svg class="ic"><use href="#i-link"/></svg> 用邀請碼加好友，一起開始</span>
         </div>
         <div class="challenge-list">
           <div class="challenge">
-            <div class="avatar">🥦</div>
+            <div class="avatar"><svg class="ic"><use href="#i-broccoli"/></svg></div>
             <div><b>阿杰指定你今天吃青花菜</b><span>接受挑戰，完成後獲得 V 點獎勵（會避開你不吃的菜）。</span></div>
           </div>
           <div class="challenge">
-            <div class="avatar">👨‍👩‍👧</div>
+            <div class="avatar"><svg class="ic"><use href="#i-friends"/></svg></div>
             <div><b>和家人一起吃菜</b><span>邀爸媽或伴侶加入，把「今天吃菜了嗎」變成共同話題。</span></div>
           </div>
           <div class="challenge">
-            <div class="avatar">🏆</div>
+            <div class="avatar"><svg class="ic"><use href="#i-trophy"/></svg></div>
             <div><b>好友 V 點排行榜</b><span>看看誰真的有打卡完成，互相推一把。</span></div>
           </div>
         </div>
@@ -567,9 +691,9 @@
         <p>吃菜吧 iOS 版即將上架 App Store。與其等到體檢報告才後悔，不如從今天的一盤菜開始，揪上親友一起養成習慣。</p>
         <a class="button" href="https://forms.gle/AEQd8FkL3suwBGce9" target="_blank" rel="noopener">收到上架通知</a>
         <div class="contact-row">
-          <span>💻 開源專案：<a href="https://github.com/EatVege" target="_blank" rel="noopener">github.com/EatVege</a></span>
-          <span>✉️ 聯繫團隊：<a href="mailto:k66@k66.ninja">k66@k66.ninja</a></span>
-          <span>🧵 Threads：<a href="https://www.threads.com/@k66inthesky" target="_blank" rel="noopener">@k66inthesky</a></span>
+          <span><svg class="ic"><use href="#i-code"/></svg> 開源專案：<a href="https://github.com/EatVege" target="_blank" rel="noopener">github.com/EatVege</a></span>
+          <span><svg class="ic"><use href="#i-mail"/></svg> 聯繫團隊：<a href="mailto:k66@k66.ninja">k66@k66.ninja</a></span>
+          <span><svg class="ic"><use href="#i-at"/></svg> Threads：<a href="https://www.threads.com/@k66inthesky" target="_blank" rel="noopener">@k66inthesky</a></span>
         </div>
       </div>
     </section>
