@@ -227,9 +227,9 @@
     .origin .kicker { color: var(--matcha-dark); font-weight: 900; font-size: 13px; letter-spacing: .04em; }
     .origin h3 { margin: 6px 0 10px; color: var(--ink); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.25; letter-spacing: -.03em; }
     .origin p { margin: 0; color: #4A5142; font-size: 16px; line-height: 1.8; }
-    .origin .beans { margin: 12px 0 0; display: flex; gap: 16px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); }
+    .origin .beans { margin: 14px 0 0; display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--muted); font-weight: 700; }
     .origin .beans span { display: inline-flex; align-items: center; gap: 7px; }
-    .origin .dot { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+    .origin .beans .ic { width: 24px; height: 24px; vertical-align: middle; }
 
     /* Feature grid */
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
@@ -388,6 +388,17 @@
           <path d="M30 55 C30 41 27 29 22 19"/><path d="M34 55 C34 42 39 31 44 21"/>
         </g>
         <g fill="#69A542"><path d="M22 19 C17 17 14 19 12 22 C16 23 19 22 23 22 Z"/><path d="M44 21 C49 19 52 21 54 24 C50 25 47 24 43 24 Z"/><path d="M32 40 C27 38 24 40 22 43 C26 44 29 43 33 43 Z"/></g>
+      </symbol>
+      <symbol id="i-peas" viewBox="0 0 64 64">
+        <g fill="#5F9A3E"><circle cx="23" cy="36" r="11"/><circle cx="41" cy="36" r="11"/><circle cx="32" cy="22" r="11"/></g>
+        <g fill="#7FB84E"><circle cx="19" cy="32" r="3.4"/><circle cx="37" cy="32" r="3.4"/><circle cx="28" cy="18" r="3.4"/></g>
+      </symbol>
+      <symbol id="i-corn" viewBox="0 0 64 64">
+        <path d="M22 46 C16 51 14 57 16 59 C22 58 26 53 28 48 Z" fill="#6FA84B"/>
+        <path d="M42 46 C48 51 50 57 48 59 C42 58 38 53 36 48 Z" fill="#5F9A3E"/>
+        <path d="M32 9 C40 9 45 18 45 31 C45 43 39 53 32 53 C25 53 19 43 19 31 C19 18 24 9 32 9 Z" fill="#FFCC38"/>
+        <path d="M32 9 C40 9 45 18 45 31 C45 43 39 53 32 53 Z" fill="#F0B92A"/>
+        <g stroke="#E0A81C" stroke-width="1.5" stroke-linecap="round"><path d="M24 20 H40 M22 29 H42 M22 38 H42 M26 46 H38"/><path d="M32 12 V50"/><path d="M27 15 V49 M37 15 V49"/></g>
       </symbol>
       <symbol id="i-logo" viewBox="0 0 64 64">
         <path d="M32 8 L48 17 L48 35 L32 44 L16 35 L16 17 Z" fill="#6FAE4C"/>
@@ -604,12 +615,12 @@
         <img class="logo" src="assets/eatvege-logo.png" alt="吃菜吧 logo">
         <div>
           <div class="kicker">品牌故事</div>
-          <h3>這顆 logo，是我小時候最想倒掉的一盤菜。</h3>
-          <p>吃菜吧的 logo，原型是 2026 年台灣營養午餐「討厭榜」榜首——三色豆。那三個色塊，正是豌豆的綠、玉米的黃、紅蘿蔔的橘。小學時期，我總是趁老師沒注意，把整碗三色豆偷偷倒掉。長大後才明白：問題從來不是「我不愛吃菜」，而是沒有人陪我找到容易開始的方法。於是我把當年最想倒掉的那盤，做成了吃菜吧——今天願意好好吃完的三樣菜。</p>
+          <h3>對不愛的菜，每天比昨天多吃一點點就好。</h3>
+          <p>吃菜吧的 logo，原型是 2026 年台灣營養午餐「討厭榜」榜首——三色豆；三個色塊，正是豌豆的綠、玉米的黃、紅蘿蔔的橘。小學時，我的導師從不逼我們把整碗吃完，只說了一句：「不喜歡的菜，只要每天吃得比昨天多一點點就好。」這正是吃菜吧想傳達的事——養成吃菜的習慣不必一次到位，今天比昨天多一口，就是進步。</p>
           <div class="beans" aria-hidden="true">
-            <span><i class="dot" style="background:#5F9A3E"></i>豌豆綠</span>
-            <span><i class="dot" style="background:#FFCC38"></i>玉米黃</span>
-            <span><i class="dot" style="background:#E8792B"></i>紅蘿蔔橘</span>
+            <span><svg class="ic"><use href="#i-peas"/></svg>豌豆綠</span>
+            <span><svg class="ic"><use href="#i-corn"/></svg>玉米黃</span>
+            <span><svg class="ic"><use href="#i-carrot"/></svg>紅蘿蔔橘</span>
           </div>
         </div>
       </div>
