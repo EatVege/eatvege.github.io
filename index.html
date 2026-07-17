@@ -216,6 +216,21 @@
     .turn { text-align: center; }
     .turn .eyebrow { margin: 0 auto 18px; }
 
+    /* 品牌起源故事 */
+    .origin {
+      display: grid; grid-template-columns: auto 1fr; gap: 30px; align-items: center;
+      text-align: left; max-width: 940px; margin: 4px auto 42px; padding: 32px 36px;
+      border-radius: 34px; background: linear-gradient(135deg, var(--card-green), #fff);
+      border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+    }
+    .origin .logo { width: 104px; height: 104px; border-radius: 24px; background: #fff; object-fit: cover; box-shadow: var(--shadow-sm); flex: none; }
+    .origin .kicker { color: var(--matcha-dark); font-weight: 900; font-size: 13px; letter-spacing: .04em; }
+    .origin h3 { margin: 6px 0 10px; color: var(--ink); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.25; letter-spacing: -.03em; }
+    .origin p { margin: 0; color: #4A5142; font-size: 16px; line-height: 1.8; }
+    .origin .beans { margin: 12px 0 0; display: flex; gap: 16px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); }
+    .origin .beans span { display: inline-flex; align-items: center; gap: 7px; }
+    .origin .dot { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+
     /* Feature grid */
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
     .feature {
@@ -306,6 +321,9 @@
       section { padding: 50px 0; }
       .reality { border-radius: 32px; padding: 44px 0; }
       .feature, .panel, .stat-card, .quote-card { padding: 26px; }
+      .origin { grid-template-columns: 1fr; gap: 18px; text-align: center; padding: 26px; }
+      .origin .logo { width: 84px; height: 84px; margin: 0 auto; }
+      .origin .beans { justify-content: center; }
       .final-cta { padding: 36px 22px; border-radius: 32px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
@@ -580,6 +598,20 @@
       <div class="section-head">
         <h2>你不是不自律，<br>是需要更容易開始。</h2>
         <p>吃菜吧是一款「養成吃菜習慣」的 App。它把「我要吃健康一點」拆成每天 3 個做得到的小動作——不用記熱量、不用算克數，先把今天這一盤吃完就好。</p>
+      </div>
+
+      <div class="origin">
+        <img class="logo" src="assets/eatvege-logo.png" alt="吃菜吧 logo">
+        <div>
+          <div class="kicker">品牌故事</div>
+          <h3>這顆 logo，是我小時候最想倒掉的一盤菜。</h3>
+          <p>吃菜吧的 logo，原型是 2026 年台灣營養午餐「討厭榜」榜首——三色豆。那三個色塊，正是豌豆的綠、玉米的黃、紅蘿蔔的橘。小學時期，我總是趁老師沒注意，把整碗三色豆偷偷倒掉。長大後才明白：問題從來不是「我不愛吃菜」，而是沒有人陪我找到容易開始的方法。於是我把當年最想倒掉的那盤，做成了吃菜吧——今天願意好好吃完的三樣菜。</p>
+          <div class="beans" aria-hidden="true">
+            <span><i class="dot" style="background:#5F9A3E"></i>豌豆綠</span>
+            <span><i class="dot" style="background:#FFCC38"></i>玉米黃</span>
+            <span><i class="dot" style="background:#E8792B"></i>紅蘿蔔橘</span>
+          </div>
+        </div>
       </div>
 
       <div class="grid">
